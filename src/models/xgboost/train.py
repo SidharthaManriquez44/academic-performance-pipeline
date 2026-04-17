@@ -1,4 +1,4 @@
-from src.models.pipeline import build_pipeline
+from models.xgboost.pipeline import build_pipeline
 from sklearn.model_selection import train_test_split
 from src.utils.logger_config import get_logger
 import joblib

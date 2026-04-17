@@ -10,7 +10,7 @@ from src.features.select_features import select_features
 from src.features.feature_engineering import transform
 
 from src.utils.logger_config import get_logger
-from src.models.train import train
+from models.xgboost.train import train
 from src.evaluation.metrics import evaluate
 
 
