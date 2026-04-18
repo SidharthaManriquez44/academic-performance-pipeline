@@ -9,7 +9,7 @@ from src.features.feature_engineering import transform
 from src.features.confusion_matrix import plot_confusion_matrix
 
 from src.utils.logger_config import get_logger
-from models.xgboost.train import train
+from models.random_forest.train_random import train
 from src.evaluation.metrics import evaluate
 
 logger = get_logger(__name__)
@@ -17,7 +17,7 @@ BASE_DIR = Path(__file__).resolve().parents[2]
 
 
 def run_pipeline(kind: str = "binary"):
-    logger.info(f"Running pipeline | mode={kind}")
+    logger.info(f"Running Random Forest pipeline | mode={kind}")
 
     # Load
     file_path = BASE_DIR / "data/raw/students.csv"
@@ -41,7 +41,6 @@ def run_pipeline(kind: str = "binary"):
 
     # Evaluate
     logger.info(classification_report(y_test, y_pred))
-
     evaluate(model, X_test, y_test)
 
     # Confusion Matrix
@@ -52,18 +51,18 @@ def run_pipeline(kind: str = "binary"):
         plot_confusion_matrix(
             y_test_labels,
             y_pred_labels,
-            "Confusion Matrix - XGBoost (Multiclass)"
+            "Confusion Matrix - Random Forest (Multiclass)"
         )
     else:
         plot_confusion_matrix(
             y_test,
             y_pred,
-            "Confusion Matrix - XGBoost (Binary)"
+            "Confusion Matrix - Random Forest (Binary)"
         )
 
     return model
 
 
 if __name__ == "__main__":
-    run_pipeline(kind="binary")
     # run_pipeline(kind="multiclass")
+    run_pipeline(kind="binary")
